@@ -1,0 +1,40 @@
+/* src/styles/CategoryDetails.module.css */
+.categoryDetails {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.categoryDetails h2 {
+    margin-bottom: 1rem;
+}
+
+.categoryDetails form {
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryDetails label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.categoryDetails input,
+.categoryDetails select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.categoryDetails button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.categoryDetails button:hover {
+    background-color: #0056b3;
+}

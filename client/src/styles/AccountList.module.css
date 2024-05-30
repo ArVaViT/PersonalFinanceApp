@@ -1,0 +1,46 @@
+/* src/styles/AccountList.module.css */
+.accountList {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.accountList h2 {
+    margin-bottom: 1rem;
+}
+
+.accountList ul {
+    list-style: none;
+    padding: 0;
+}
+
+.accountList li {
+    background-color: white;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accountList a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.accountList a:hover {
+    text-decoration: underline;
+}
+
+.accountList button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.accountList button:hover {
+    background-color: #c82333;
+}

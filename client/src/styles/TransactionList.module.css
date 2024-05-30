@@ -1,0 +1,46 @@
+/* src/styles/TransactionList.module.css */
+.transactionList {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.transactionList h2 {
+    margin-bottom: 1rem;
+}
+
+.transactionList ul {
+    list-style: none;
+    padding: 0;
+}
+
+.transactionList li {
+    background-color: white;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transactionList a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.transactionList a:hover {
+    text-decoration: underline;
+}
+
+.transactionList button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.transactionList button:hover {
+    background-color: #c82333;
+}

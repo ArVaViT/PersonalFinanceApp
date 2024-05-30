@@ -1,0 +1,46 @@
+/* src/styles/GoalList.module.css */
+.goalList {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.goalList h2 {
+    margin-bottom: 1rem;
+}
+
+.goalList ul {
+    list-style: none;
+    padding: 0;
+}
+
+.goalList li {
+    background-color: white;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.goalList a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.goalList a:hover {
+    text-decoration: underline;
+}
+
+.goalList button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.goalList button:hover {
+    background-color: #c82333;
+}

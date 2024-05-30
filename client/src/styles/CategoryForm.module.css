@@ -1,0 +1,40 @@
+/* src/styles/CategoryForm.module.css */
+.categoryForm {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.categoryForm h2 {
+    margin-bottom: 1rem;
+}
+
+.categoryForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryForm label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.categoryForm input,
+.categoryForm select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.categoryForm button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.categoryForm button:hover {
+    background-color: #0056b3;
+}

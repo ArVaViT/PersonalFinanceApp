@@ -1,0 +1,46 @@
+/* src/styles/CategoryList.module.css */
+.categoryList {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.categoryList h2 {
+    margin-bottom: 1rem;
+}
+
+.categoryList ul {
+    list-style: none;
+    padding: 0;
+}
+
+.categoryList li {
+    background-color: white;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categoryList a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.categoryList a:hover {
+    text-decoration: underline;
+}
+
+.categoryList button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.categoryList button:hover {
+    background-color: #c82333;
+}

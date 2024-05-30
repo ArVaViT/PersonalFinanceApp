@@ -1,0 +1,40 @@
+/* src/styles/GoalForm.module.css */
+.goalForm {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.goalForm h2 {
+    margin-bottom: 1rem;
+}
+
+.goalForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+.goalForm label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.goalForm input,
+.goalForm select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.goalForm button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.goalForm button:hover {
+    background-color: #0056b3;
+}

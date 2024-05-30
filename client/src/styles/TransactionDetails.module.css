@@ -1,0 +1,40 @@
+/* src/styles/TransactionDetails.module.css */
+.transactionDetails {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.transactionDetails h2 {
+    margin-bottom: 1rem;
+}
+
+.transactionDetails form {
+    display: flex;
+    flex-direction: column;
+}
+
+.transactionDetails label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.transactionDetails input,
+.transactionDetails select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.transactionDetails button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.transactionDetails button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,23 @@
+// src/components/componentsIndex.js
+export { default as Navbar } from './Layout/Navbar';
+export { default as Footer } from './Layout/Footer';
+export { default as Button } from './UI/Button';
+export { default as Input } from './UI/Input';
+export { default as Select } from './UI/Select';
+export { default as Dashboard } from './Dashboard';
+export { default as LoginForm } from './Auth/LoginForm';
+export { default as RegisterForm } from './Auth/RegisterForm';
+export { default as AccountList } from './Dashboard/Accounts/AccountList';
+export { default as AccountForm } from './Dashboard/Accounts/AccountForm';
+export { default as AccountDetails } from './Dashboard/Accounts/AccountDetails';
+export { default as CategoryList } from './Dashboard/Categories/CategoryList';
+export { default as CategoryForm } from './Dashboard/Categories/CategoryForm';
+export { default as GoalList } from './Dashboard/Goals/GoalList';
+export { default as GoalForm } from './Dashboard/Goals/GoalForm';
+export { default as GoalDetails } from './Dashboard/Goals/GoalDetails';
+export { default as ReminderList } from './Dashboard/Reminders/ReminderList';
+export { default as ReminderForm } from './Dashboard/Reminders/ReminderForm';
+export { default as ReminderDetails } from './Dashboard/Reminders/ReminderDetails';
+export { default as TransactionList } from './Dashboard/Transactions/TransactionList';
+export { default as TransactionForm } from './Dashboard/Transactions/TransactionForm';
+export { default as TransactionDetails } from './Dashboard/Transactions/TransactionDetails';

@@ -1,0 +1,40 @@
+/* src/styles/GoalDetails.module.css */
+.goalDetails {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.goalDetails h2 {
+    margin-bottom: 1rem;
+}
+
+.goalDetails form {
+    display: flex;
+    flex-direction: column;
+}
+
+.goalDetails label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.goalDetails input,
+.goalDetails select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.goalDetails button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.goalDetails button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,40 @@
+/* src/styles/TransactionForm.module.css */
+.transactionForm {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.transactionForm h2 {
+    margin-bottom: 1rem;
+}
+
+.transactionForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+.transactionForm label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.transactionForm input,
+.transactionForm select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.transactionForm button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.transactionForm button:hover {
+    background-color: #0056b3;
+}
