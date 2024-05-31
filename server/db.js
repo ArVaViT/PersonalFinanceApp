@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+// Загрузка переменных окружения из .env файла
+dotenv.config();
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect('mongodb+srv://arvavitcorp:hQEjS1AmOb65zy4I@cluster0.kepxq6y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
@@ -14,3 +18,4 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+

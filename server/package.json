@@ -6,9 +6,11 @@
     "bcrypt": "^5.0.1",
     "config": "^3.3.11",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^6.7.0",
     "mongoose": "^8.3.3"
   },
   "scripts": {
