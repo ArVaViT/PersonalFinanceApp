@@ -19,7 +19,7 @@ const CategoryList = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get('http://localhost:5000/api/categories', config);
+                const res = await axios.get('https://personal-finance-app-rngp.vercel.app/api/categories', config);
                 setCategories(res.data);
                 setLoading(false);
             } catch (err) {
@@ -40,7 +40,7 @@ const CategoryList = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.delete(`http://localhost:5000/api/categories/${id}`, config);
+            const res = await axios.get('https://personal-finance-app-rngp.vercel.app/api/categories', config);
             setCategories(categories.filter(category => category._id !== id));
         } catch (err) {
             setError('Failed to delete category. Please try again.');

@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const connectDB = require('./db');
 const cors = require('cors');
@@ -14,7 +13,7 @@ app.use(express.json({ extended: false }));
 
 // Настройки CORS для безопасности
 const corsOptions = {
-    origin: 'http://localhost:3000', // Укажите адрес фронтенда
+    origin: 'https://personal-finance-app-rngp.vercel.app', // Укажите точный адрес вашего фронтенда для продакшена
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
@@ -36,3 +35,5 @@ app.use((err, req, res, next) => {
 
 // Запуск сервера
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+module.exports = app;

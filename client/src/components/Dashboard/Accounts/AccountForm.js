@@ -27,7 +27,7 @@ const AccountForm = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.post('http://localhost:5000/api/accounts/create', formData, config);
+            await axios.post('https://personal-finance-app-rngp.vercel.app/api/accounts/create', formData, config);
             history.push('/accounts'); // Перенаправление на страницу списка счетов после создания
         } catch (err) {
             setError('Failed to create account. Please try again.');

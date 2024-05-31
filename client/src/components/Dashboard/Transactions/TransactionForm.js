@@ -27,8 +27,8 @@ const TransactionForm = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const categoriesRes = await axios.get('http://localhost:5000/api/categories', config);
-                const accountsRes = await axios.get('http://localhost:5000/api/accounts', config);
+                const categoriesRes = await axios.post('https://personal-finance-app-rngp.vercel.app/api/transactions/create', formData, config);
+                const accountsRes = await axios.post('https://personal-finance-app-rngp.vercel.app/api/transactions/create', formData, config);
                 setCategories(categoriesRes.data);
                 setAccounts(accountsRes.data);
             } catch (err) {

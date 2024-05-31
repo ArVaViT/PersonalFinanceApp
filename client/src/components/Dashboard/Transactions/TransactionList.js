@@ -19,7 +19,7 @@ const TransactionList = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get('http://localhost:5000/api/transactions', config);
+                const res = await axios.get('https://personal-finance-app-rngp.vercel.app/api/transactions', config);
                 setTransactions(res.data);
                 setLoading(false);
             } catch (err) {
