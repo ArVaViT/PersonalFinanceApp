@@ -40,7 +40,7 @@ const TransactionList = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.delete(`http://localhost:5000/api/transactions/${id}`, config);
+            await axios.delete(`https://personal-finance-app-rngp.vercel.app/api/transactions/${id}`, config);
             setTransactions(transactions.filter(transaction => transaction._id !== id));
         } catch (err) {
             setError('Failed to delete transaction. Please try again.');

@@ -53,7 +53,7 @@ const TransactionForm = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.post('http://localhost:5000/api/transactions/create', formData, config);
+            await axios.post('https://personal-finance-app-rngp.vercel.app/api/transactions/create', formData, config);
             history.push('/transactions'); // Перенаправление на страницу списка транзакций после создания
         } catch (err) {
             setError('Failed to create transaction. Please try again.');

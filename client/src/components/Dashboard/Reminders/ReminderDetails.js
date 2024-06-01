@@ -25,7 +25,7 @@ const ReminderDetails = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get(`http://localhost:5000/api/reminders/${id}`, config);
+                const res = await axios.get(`https://personal-finance-app-rngp.vercel.app/api/reminders/${id}`, config);
                 setFormData(res.data);
             } catch (err) {
                 setError('Failed to fetch reminder. Please try again.');
@@ -49,7 +49,7 @@ const ReminderDetails = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.put(`http://localhost:5000/api/reminders/${id}`, formData, config);
+            await axios.put(`https://personal-finance-app-rngp.vercel.app/api/reminders/${id}`, formData, config);
             history.push('/reminders'); // Перенаправление на страницу списка напоминаний после обновления
         } catch (err) {
             setError('Failed to update reminder. Please try again.');
