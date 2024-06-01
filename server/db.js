@@ -12,7 +12,7 @@ const connectDB = async () => {
         });
         console.log(`MongoDB connected: ${conn.connection.host}`);
     } catch (err) {
-        console.error(err.message);
+        console.error('bad auth : authentication failed');
         process.exit(1);
     }
 };
