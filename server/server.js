@@ -5,29 +5,29 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Підключення до бази даних
+// Подключение к базе данных
 connectDB();
 
-// Middleware для обробки JSON
+// Middleware для обработки JSON
 app.use(express.json({ extended: false }));
 
 // Настройки CORS для безопасности
 const corsOptions = {
-    origin: 'https://personal-finance-app-rngp.vercel.app', // Укажите точный адрес вашего фронтенда для продакшена
+    origin: 'https://personal-finance-app-pi.vercel.app/', // Укажите точный адрес вашего фронтенда для продакшена
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 
-// Маршрути API
-app.use('/api/auth', require('./routes/auth')); // Аутентифікація
-app.use('/api/users', require('./routes/users')); // Управління профілем
-app.use('/api/accounts', require('./routes/accounts')); // Управління рахунками
-app.use('/api/categories', require('./routes/categories')); // Управління категоріями
-app.use('/api/transactions', require('./routes/transactions')); // Управління транзакціями
-app.use('/api/goals', require('./routes/goals')); // Управління цілями 
-app.use('/api/reminders', require('./routes/reminders')); // Управління нагадуваннями
+// Маршруты API
+app.use('/api/auth', require('./routes/auth')); // Аутентификация
+app.use('/api/users', require('./routes/users')); // Управление профилем
+app.use('/api/accounts', require('./routes/accounts')); // Управление счетами
+app.use('/api/categories', require('./routes/categories')); // Управление категориями
+app.use('/api/transactions', require('./routes/transactions')); // Управление транзакциями
+app.use('/api/goals', require('./routes/goals')); // Управление целями
+app.use('/api/reminders', require('./routes/reminders')); // Управление напоминаниями
 
-// Middleware для глобальної обробки помилок
+// Middleware для глобальной обработки ошибок
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
