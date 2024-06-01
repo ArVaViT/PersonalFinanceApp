@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-// Загрузка переменных окружения из .env файла
 dotenv.config();
 
 const connectDB = async () => {
@@ -18,4 +17,3 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
-
