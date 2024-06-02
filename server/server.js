@@ -18,10 +18,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Корневой маршрут
 app.get('/', (req, res) => {
     res.send('API is running');
 });
-
 
 // Маршруты API
 app.use('/api/auth', require('./routes/auth')); // Аутентификация

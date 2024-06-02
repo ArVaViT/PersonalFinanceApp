@@ -1,3 +1,4 @@
 {
-  "jwtSecret": "d0c7f6e1f2e3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7g8h9"
+  "MONGODB_URI": "mongodb+srv://arvavitcorp:arvavitcorp@cluster0.kepxq6y.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "your_jwt_secret"
 }

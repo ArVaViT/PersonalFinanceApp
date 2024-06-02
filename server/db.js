@@ -1,18 +1,14 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const config = require('config');
 
-// Загрузка переменных окружения из .env файла
-dotenv.config();
+const db = config.get('MONGODB_URI');
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log(`MongoDB connected: ${conn.connection.host}`);
+        await mongoose.connect(db);
+        console.log('MongoDB Connected...');
     } catch (err) {
-        console.error('bad auth : authentication failed');
+        console.error(err.message);
         process.exit(1);
     }
 };
