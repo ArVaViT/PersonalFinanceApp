@@ -26,7 +26,7 @@ app.use(express.json({ extended: false }));
 
 // Настройки CORS для безопасности
 const corsOptions = {
-    origin: 'https://personal-finance-app-pi.vercel.app', // Укажите точный адрес вашего фронтенда для продакшена
+    origin: 'https://personal-finance-app-d5g5.vercel.app', // Укажите точный адрес вашего фронтенда для продакшена
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
@@ -37,16 +37,17 @@ app.get('/', (req, res) => {
 });
 
 // Маршруты API
-app.use('/api/auth', require('./routes/auth')); // Аутентификация
-app.use('/api/users', require('./routes/users')); // Управление профилем
-app.use('/api/accounts', require('./routes/accounts')); // Управление счетами
-app.use('/api/categories', require('./routes/categories')); // Управление категориями
-app.use('/api/transactions', require('./routes/transactions')); // Управление транзакциями
-app.use('/api/goals', require('./routes/goals')); // Управление целями
-app.use('/api/reminders', require('./routes/reminders')); // Управление напоминаниями
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/accounts', require('./routes/accounts'));
+app.use('/api/categories', require('./routes/categories'));
+app.use('/api/transactions', require('./routes/transactions'));
+app.use('/api/goals', require('./routes/goals'));
+app.use('/api/reminders', require('./routes/reminders'));
 
 // Middleware для глобальной обработки ошибок
 app.use((err, req, res, next) => {
+    console.error('Error message:', err.message);
     console.error('Error stack:', err.stack);
     res.status(500).send('Something broke!');
 });
