@@ -6,7 +6,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Подключение к базе данных
-connectDB();
+connectDB().then(() => {
+  console.log('MongoDB Connected...');
+}).catch(err => {
+  console.error('Failed to connect to MongoDB:', err);
+});
 
 // Middleware для обработки JSON
 app.use(express.json({ extended: false }));
@@ -34,7 +38,7 @@ app.use('/api/reminders', require('./routes/reminders')); // Управлени�
 
 // Middleware для глобальной обработки ошибок
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+    console.error('Error stack:', err.stack);
     res.status(500).send('Something broke!');
 });
 
