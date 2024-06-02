@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.11",
     "cors": "^2.8.5",
