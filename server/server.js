@@ -18,6 +18,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.get('/', (req, res) => {
+    res.send('API is running');
+});
+
+
 // Маршруты API
 app.use('/api/auth', require('./routes/auth')); // Аутентификация
 app.use('/api/users', require('./routes/users')); // Управление профилем
