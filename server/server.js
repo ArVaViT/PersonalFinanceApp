@@ -1,15 +1,24 @@
 const express = require('express');
 const connectDB = require('./db');
 const cors = require('cors');
+const config = require('config');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Проверка наличия переменной MONGODB_URI
+const db = config.get('MONGODB_URI');
+if (!db) {
+    console.error('FATAL ERROR: MONGODB_URI is not defined.');
+    process.exit(1);
+}
 
 // Подключение к базе данных
 connectDB().then(() => {
   console.log('MongoDB Connected...');
 }).catch(err => {
   console.error('Failed to connect to MongoDB:', err);
+  process.exit(1);
 });
 
 // Middleware для обработки JSON

@@ -23,7 +23,7 @@ const LoginForm = () => {
         }
         
         try {
-            const res = await axios.post('https://personal-finance-app-rngp.vercel.app/api/auth/login', formData);
+            const res = await axios.post('https://personal-finance-app-d5g5.vercel.app/api/auth/login', formData);
             localStorage.setItem('token', res.data.token);
             history.push('/dashboard');
         } catch (err) {
