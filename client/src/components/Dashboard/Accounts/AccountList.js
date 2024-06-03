@@ -19,7 +19,7 @@ const AccountList = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/create', formData, config);
+                const res = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/create', config);
                 setAccounts(res.data);
                 setLoading(false);
             } catch (err) {
@@ -40,7 +40,7 @@ const AccountList = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/create', formData, config);
+            await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/create', config);
             setAccounts(accounts.filter(account => account._id !== id));
         } catch (err) {
             setError('Failed to delete account. Please try again.');
