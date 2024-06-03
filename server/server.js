@@ -12,7 +12,7 @@ app.use(express.json({ extended: false }));
 
 // Настройки CORS для безопасности
 const corsOptions = {
-    origin: 'https://your-vercel-app-name.vercel.app', // Укажите точный адрес вашего фронтенда для продакшена
+    origin: 'https://personal-finance-kpn2090cv-vadyms-projects-dfb6f76f.vercel.app/', // Укажите точный адрес вашего фронтенда для продакшена
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
