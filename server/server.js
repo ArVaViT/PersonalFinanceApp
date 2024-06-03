@@ -24,7 +24,7 @@ const corsOptions = {
     }
   },
   optionsSuccessStatus: 200,
-  credentials: true // Если вам нужно передавать куки
+  credentials: true
 };
 
 app.use(cors(corsOptions));
