@@ -11,26 +11,47 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json({ extended: false }));
 
 // Настройки CORS для безопасности
+const allowedOrigins = [
+  'https://personal-finance-2ant5sf2e-vadyms-projects-dfb6f76f.vercel.app', // Ваш основной Vercel домен
+  'http://localhost:3000' // Добавьте это, если тестируете локально
+];
+
 const corsOptions = {
-    origin: 'https://personal-finance-kpn2090cv-vadyms-projects-dfb6f76f.vercel.app/', // Укажите точный адрес вашего фронтенда для продакшена
-    optionsSuccessStatus: 200
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200,
+  credentials: true // Если вам нужно передавать куки
 };
+
 app.use(cors(corsOptions));
 
+// Middleware для добавления CORS-заголовков ко всем маршрутам
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://personal-finance-2ant5sf2e-vadyms-projects-dfb6f76f.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
+});
+
 // Обслуживание статических файлов
-app.use(express.static(path.join(__dirname, 'public')));  // <-- добавьте эту строку
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Корневой маршрут
 app.get('/', (req, res) => {
-    res.send('API is running');
+  res.send('API is running');
 });
 
 // Подключение к базе данных
 connectDB().then(() => {
-    console.log('MongoDB Connected...');
+  console.log('MongoDB Connected...');
 }).catch(err => {
-    console.error('Failed to connect to MongoDB:', err);
-    process.exit(1);
+  console.error('Failed to connect to MongoDB:', err);
+  process.exit(1);
 });
 
 // Маршруты API
@@ -44,9 +65,9 @@ app.use('/api/reminders', require('./routes/reminders'));
 
 // Middleware для глобальной обработки ошибок
 app.use((err, req, res, next) => {
-    console.error('Error message:', err.message);
-    console.error('Error stack:', err.stack);
-    res.status(500).send('Something broke!');
+  console.error('Error message:', err.message);
+  console.error('Error stack:', err.stack);
+  res.status(500).send('Something broke!');
 });
 
 // Запуск сервера
