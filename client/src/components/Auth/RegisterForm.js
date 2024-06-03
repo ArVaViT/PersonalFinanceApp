@@ -1,65 +1,65 @@
-// src/components/Auth/RegisterForm.js
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 const RegisterForm = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        password2: ''
-    });
-    const [error, setError] = useState('');
-    const history = useHistory();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+  const [error, setError] = useState('');
+  const history = useHistory();
 
-    const { name, email, password, password2 } = formData;
+  const { name, email, password } = formData;
 
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const onSubmit = async e => {
-        e.preventDefault();
-        if (password !== password2) {
-            setError('Passwords do not match');
-        } else {
-            try {
-                await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/auth/register', formData);
-                history.push('/'); // Перенаправление на страницу логина после успешной регистрации
-            } catch (err) {
-                if (err.response && err.response.data && err.response.data.errors) {
-                    setError(err.response.data.errors[0].msg);
-                } else {
-                    setError('Registration failed. Please try again.');
-                }
-            }
-        }
-    };
+  const onSubmit = async e => {
+    e.preventDefault();
 
-    return (
+    if (!name || !email || !password) {
+      setError('All fields are required');
+      return;
+    }
+
+    try {
+      const res = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/users', formData);
+      localStorage.setItem('token', res.data.token);
+      history.push('/dashboard');
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.errors) {
+        setError(err.response.data.errors[0].msg);
+      } else {
+        setError('An error occurred. Please try again.');
+      }
+    }
+  };
+
+  return (
+    <div>
+      <h1>Register</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={onSubmit}>
         <div>
-            <h2>Register</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <form onSubmit={onSubmit}>
-                <div>
-                    <label htmlFor="name">Name:</label>
-                    <input type="text" name="name" value={name} onChange={onChange} required />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" name="email" value={email} onChange={onChange} required />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" name="password" value={password} onChange={onChange} required />
-                </div>
-                <div>
-                    <label htmlFor="password2">Confirm Password:</label>
-                    <input type="password" name="password2" value={password2} onChange={onChange} required />
-                </div>
-                <button type="submit">Register</button>
-            </form>
+          <label htmlFor="name">Name:</label>
+          <input type="text" name="name" value={name} onChange={onChange} required />
         </div>
-    );
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" name="email" value={email} onChange={onChange} required />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input type="password" name="password" value={password} onChange={onChange} required />
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      <p>
+        Already have an account? <Link to="/login">Login here</Link>
+      </p>
+    </div>
+  );
 };
 
 export default RegisterForm;

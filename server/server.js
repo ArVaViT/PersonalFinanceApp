@@ -8,8 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 // CORS configuration
 const allowedOrigins = [
-  'https://personal-finance-app-git-master-vadyms-projects-dfb6f76f.vercel.app',
-  'https://personal-finance-lrud3l38t-vadyms-projects-dfb6f76f.vercel.app'
+  'https://personal-finance-app-wine.vercel.app' // Убедитесь, что добавили правильный домен
 ];
 
 const corsOptions = {
@@ -17,6 +16,7 @@ const corsOptions = {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log('Blocked by CORS:', origin); // Для дебага
       callback(new Error('Not allowed by CORS'));
     }
   },

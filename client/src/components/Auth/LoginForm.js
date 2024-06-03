@@ -16,12 +16,12 @@ const LoginForm = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    
+
     if (!email || !password) {
       setError('Email and password must not be empty');
       return;
     }
-    
+
     try {
       const res = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/auth/login', formData);
       localStorage.setItem('token', res.data.token);
