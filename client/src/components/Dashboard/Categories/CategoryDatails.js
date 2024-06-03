@@ -1,4 +1,3 @@
-// src/components/Dashboard/Categories/CategoryDetails.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
@@ -48,14 +47,14 @@ const CategoryDetails = () => {
                 }
             };
             await axios.put(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/categories/${id}`, formData, config);
-            history.push('/categories'); // Перенаправление на страницу списка категорий после обновления
+            history.push('/categories'); // Redirect to category list page after update
         } catch (err) {
             setError('Failed to update category. Please try again.');
         }
     };
 
     return (
-        <div className={styles.categoryDetails}> 
+        <div className={styles.categoryDetails}>
             <h2>Update Category</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={onSubmit}>

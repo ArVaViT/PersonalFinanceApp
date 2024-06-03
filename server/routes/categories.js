@@ -1,4 +1,3 @@
-// categories.js
 const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth');
@@ -19,13 +18,12 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/categories/create
-// @desc    Create a new category
+// @desc    Create a category
 // @access  Private
 router.post('/create', [
-    auth, 
+    auth,
     [
-        check('name', 'Name is required').not().isEmpty(),
-        check('type', 'Type is required').not().isEmpty()
+        check('name', 'Name is required').not().isEmpty()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -33,12 +31,11 @@ router.post('/create', [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, type } = req.body;
+    const { name } = req.body;
 
     try {
         const newCategory = new Category({
             name,
-            type,
             user: req.user.id
         });
 
@@ -54,10 +51,9 @@ router.post('/create', [
 // @desc    Update a category
 // @access  Private
 router.put('/:id', [
-    auth, 
+    auth,
     [
-        check('name', 'Name is required').not().isEmpty(),
-        check('type', 'Type is required').not().isEmpty()
+        check('name', 'Name is required').not().isEmpty()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -65,7 +61,7 @@ router.put('/:id', [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, type } = req.body;
+    const { name } = req.body;
 
     try {
         let category = await Category.findById(req.params.id);
@@ -73,13 +69,12 @@ router.put('/:id', [
             return res.status(404).json({ msg: 'Category not found' });
         }
 
-        // Проверка, является ли пользователь владельцем категории
+        // Ensure user owns the category
         if (category.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }
 
         category.name = name;
-        category.type = type;
 
         await category.save();
         res.json(category);
@@ -99,7 +94,7 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Category not found' });
         }
 
-        // Проверка, является ли пользователь владельцем категории
+        // Ensure user owns the category
         if (category.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }

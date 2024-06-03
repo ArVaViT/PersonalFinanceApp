@@ -1,4 +1,3 @@
-// src/components/Dashboard/Accounts/AccountDetails.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
@@ -24,7 +23,7 @@ const AccountDetails = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com${id}`, config);
+                const res = await axios.get(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/${id}`, config);
                 setFormData(res.data);
             } catch (err) {
                 setError('Failed to fetch account. Please try again.');
@@ -49,7 +48,7 @@ const AccountDetails = () => {
                 }
             };
             await axios.put(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/${id}`, formData, config);
-            history.push('/accounts'); // Перенаправление на страницу списка счетов после обновления
+            history.push('/accounts'); // Redirect to account list page after update
         } catch (err) {
             setError('Failed to update account. Please try again.');
         }

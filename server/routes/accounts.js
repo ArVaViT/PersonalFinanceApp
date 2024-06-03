@@ -1,4 +1,3 @@
-// accounts.js
 const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth');
@@ -19,13 +18,13 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/accounts/create
-// @desc    Create a new account
+// @desc    Create an account
 // @access  Private
 router.post('/create', [
-    auth, 
+    auth,
     [
         check('name', 'Name is required').not().isEmpty(),
-        check('type', 'Type is required').not().isEmpty()
+        check('balance', 'Balance is required').isNumeric()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -33,12 +32,11 @@ router.post('/create', [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, type, balance } = req.body;
+    const { name, balance } = req.body;
 
     try {
         const newAccount = new Account({
             name,
-            type,
             balance,
             user: req.user.id
         });
@@ -55,10 +53,10 @@ router.post('/create', [
 // @desc    Update an account
 // @access  Private
 router.put('/:id', [
-    auth, 
+    auth,
     [
         check('name', 'Name is required').not().isEmpty(),
-        check('type', 'Type is required').not().isEmpty()
+        check('balance', 'Balance is required').isNumeric()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -66,7 +64,7 @@ router.put('/:id', [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, type, balance } = req.body;
+    const { name, balance } = req.body;
 
     try {
         let account = await Account.findById(req.params.id);
@@ -74,13 +72,12 @@ router.put('/:id', [
             return res.status(404).json({ msg: 'Account not found' });
         }
 
-        // Проверка, является ли пользователь владельцем счета
+        // Ensure user owns the account
         if (account.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }
 
         account.name = name;
-        account.type = type;
         account.balance = balance;
 
         await account.save();
@@ -101,7 +98,7 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Account not found' });
         }
 
-        // Проверка, является ли пользователь владельцем счета
+        // Ensure user owns the account
         if (account.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }

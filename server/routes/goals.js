@@ -1,4 +1,3 @@
-// goals.js
 const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth');
@@ -19,13 +18,15 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/goals/create
-// @desc    Create a new goal
+// @desc    Create a goal
 // @access  Private
 router.post('/create', [
-    auth, 
+    auth,
     [
         check('name', 'Name is required').not().isEmpty(),
-        check('targetAmount', 'Target amount is required').not().isEmpty()
+        check('targetAmount', 'Target amount is required').isNumeric(),
+        check('currentAmount', 'Current amount must be a number').isNumeric().optional(),
+        check('deadline', 'Deadline must be a valid date').optional().isISO8601()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -39,7 +40,7 @@ router.post('/create', [
         const newGoal = new Goal({
             name,
             targetAmount,
-            currentAmount,
+            currentAmount: currentAmount || 0,
             deadline,
             user: req.user.id
         });
@@ -56,10 +57,12 @@ router.post('/create', [
 // @desc    Update a goal
 // @access  Private
 router.put('/:id', [
-    auth, 
+    auth,
     [
         check('name', 'Name is required').not().isEmpty(),
-        check('targetAmount', 'Target amount is required').not().isEmpty()
+        check('targetAmount', 'Target amount is required').isNumeric(),
+        check('currentAmount', 'Current amount must be a number').isNumeric().optional(),
+        check('deadline', 'Deadline must be a valid date').optional().isISO8601()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -75,7 +78,7 @@ router.put('/:id', [
             return res.status(404).json({ msg: 'Goal not found' });
         }
 
-        // Проверка, является ли пользователь владельцем цели
+        // Ensure user owns the goal
         if (goal.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }
@@ -103,7 +106,7 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Goal not found' });
         }
 
-        // Проверка, является ли пользователь владельцем цели
+        // Ensure user owns the goal
         if (goal.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }

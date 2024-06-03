@@ -1,20 +1,15 @@
-// transactions.js
 const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth');
 const { check, validationResult } = require('express-validator');
 const Transaction = require('../model/Transaction');
-const Account = require('../model/Account'); 
 
 // @route   GET api/transactions
 // @desc    Get all transactions for current user
 // @access  Private
 router.get('/', auth, async (req, res) => {
     try {
-        const transactions = await Transaction.find({ user: req.user.id })
-                                              .sort({ date: -1 }) // Сортировка по дате (новейшие первые)
-                                              .populate('category', 'name') // Добавление информации о категории
-                                              .populate('account', 'name'); // Добавление информации о счете
+        const transactions = await Transaction.find({ user: req.user.id }).populate('category').populate('account');
         res.json(transactions);
     } catch (err) {
         console.error(err.message);
@@ -23,15 +18,13 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/transactions/create
-// @desc    Create a new transaction
+// @desc    Create a transaction
 // @access  Private
 router.post('/create', [
-    auth, 
+    auth,
     [
-        check('amount', 'Amount is required').not().isEmpty(),
-        check('date', 'Date is required').not().isEmpty(),
-        check('category', 'Category is required').not().isEmpty(),
-        check('account', 'Account is required').not().isEmpty()
+        check('amount', 'Amount is required').isNumeric(),
+        check('date', 'Date is required').isISO8601()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -42,6 +35,11 @@ router.post('/create', [
     const { amount, date, description, category, account } = req.body;
 
     try {
+        // Ensure category and account are provided
+        if (!category || !account) {
+            return res.status(400).json({ msg: 'Category and account are required' });
+        }
+
         const newTransaction = new Transaction({
             amount,
             date,
@@ -50,20 +48,6 @@ router.post('/create', [
             account,
             user: req.user.id
         });
-
-        // Обновление баланса счета
-        const selectedAccount = await Account.findById(account);
-        if (!selectedAccount) {
-            return res.status(404).json({ msg: 'Account not found' });
-        }
-
-        // Проверка, является ли пользователь владельцем счета
-        if (selectedAccount.user.toString() !== req.user.id) {
-            return res.status(401).json({ msg: 'Not authorized' });
-        }
-
-        selectedAccount.balance += amount; // Добавление или вычитание суммы в зависимости от типа транзакции
-        await selectedAccount.save();
 
         const transaction = await newTransaction.save();
         res.json(transaction);
@@ -77,12 +61,10 @@ router.post('/create', [
 // @desc    Update a transaction
 // @access  Private
 router.put('/:id', [
-    auth, 
+    auth,
     [
-        check('amount', 'Amount is required').not().isEmpty(),
-        check('date', 'Date is required').not().isEmpty(),
-        check('category', 'Category is required').not().isEmpty(),
-        check('account', 'Account is required').not().isEmpty()
+        check('amount', 'Amount is required').isNumeric(),
+        check('date', 'Date is required').isISO8601()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -98,7 +80,7 @@ router.put('/:id', [
             return res.status(404).json({ msg: 'Transaction not found' });
         }
 
-        // Проверка, является ли пользователь владельцем транзакции
+        // Ensure user owns the transaction
         if (transaction.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }
@@ -127,7 +109,7 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Transaction not found' });
         }
 
-        // Проверка, является ли пользователь владельцем транзакции
+        // Ensure user owns the transaction
         if (transaction.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }

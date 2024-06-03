@@ -1,4 +1,3 @@
-// reminders.js
 const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth');
@@ -19,14 +18,13 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/reminders/create
-// @desc    Create a new reminder
+// @desc    Create a reminder
 // @access  Private
 router.post('/create', [
-    auth, 
+    auth,
     [
-        check('title', 'Title is required').not().isEmpty(),
-        check('date', 'Date is required').not().isEmpty(),
-        check('time', 'Time is required').not().isEmpty()
+        check('message', 'Message is required').not().isEmpty(),
+        check('date', 'Date must be a valid date').optional().isISO8601()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -34,14 +32,12 @@ router.post('/create', [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, date, time, recurring } = req.body;
+    const { message, date } = req.body;
 
     try {
         const newReminder = new Reminder({
-            title,
+            message,
             date,
-            time,
-            recurring,
             user: req.user.id
         });
 
@@ -57,11 +53,10 @@ router.post('/create', [
 // @desc    Update a reminder
 // @access  Private
 router.put('/:id', [
-    auth, 
+    auth,
     [
-        check('title', 'Title is required').not().isEmpty(),
-        check('date', 'Date is required').not().isEmpty(),
-        check('time', 'Time is required').not().isEmpty()
+        check('message', 'Message is required').not().isEmpty(),
+        check('date', 'Date must be a valid date').optional().isISO8601()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -69,7 +64,7 @@ router.put('/:id', [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, date, time, recurring } = req.body;
+    const { message, date } = req.body;
 
     try {
         let reminder = await Reminder.findById(req.params.id);
@@ -77,15 +72,13 @@ router.put('/:id', [
             return res.status(404).json({ msg: 'Reminder not found' });
         }
 
-        // Проверка, является ли пользователь владельцем напоминания
+        // Ensure user owns the reminder
         if (reminder.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }
 
-        reminder.title = title;
+        reminder.message = message;
         reminder.date = date;
-        reminder.time = time;
-        reminder.recurring = recurring;
 
         await reminder.save();
         res.json(reminder);
@@ -105,7 +98,7 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Reminder not found' });
         }
 
-        // Проверка, является ли пользователь владельцем напоминания
+        // Ensure user owns the reminder
         if (reminder.user.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Not authorized' });
         }
