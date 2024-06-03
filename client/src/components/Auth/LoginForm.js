@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const LoginForm = () => {
@@ -7,52 +7,67 @@ const LoginForm = () => {
     email: '',
     password: ''
   });
+
   const [error, setError] = useState('');
   const history = useHistory();
 
   const { email, password } = formData;
 
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError('Email and password must not be empty');
-      return;
-    }
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const body = JSON.stringify({ email, password });
 
     try {
-      const res = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/auth/login', formData);
+      const res = await axios.post(
+        'https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/auth/login',
+        body,
+        config
+      );
+
       localStorage.setItem('token', res.data.token);
       history.push('/dashboard');
     } catch (err) {
-      if (err.response && err.response.data && err.response.data.errors) {
-        setError(err.response.data.errors[0].msg);
-      } else {
-        setError('An error occurred. Please try again.');
-      }
+      setError(err.response?.data?.errors[0]?.msg || 'Something went wrong');
     }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={onSubmit}>
+    <div className="login-form">
+      <h2>Login</h2>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={e => onSubmit(e)}>
         <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" name="email" value={email} onChange={onChange} required />
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={e => onChange(e)}
+            required
+          />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" name="password" value={password} onChange={onChange} required />
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={e => onChange(e)}
+            required
+          />
         </div>
         <button type="submit">Login</button>
       </form>
-      <p>
-        Don't have an account? <Link to="/register">Register here</Link>
-      </p>
     </div>
   );
 };
