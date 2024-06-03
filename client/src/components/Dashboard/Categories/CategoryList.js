@@ -40,7 +40,7 @@ const CategoryList = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            const res = await axios.get('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/categories', config);
+            await axios.delete(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/categories/${id}`, config);
             setCategories(categories.filter(category => category._id !== id));
         } catch (err) {
             setError('Failed to delete category. Please try again.');

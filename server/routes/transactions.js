@@ -24,7 +24,9 @@ router.post('/create', [
     auth,
     [
         check('amount', 'Amount is required').isNumeric(),
-        check('date', 'Date is required').isISO8601()
+        check('date', 'Date is required').isISO8601(),
+        check('category', 'Category is required').not().isEmpty(),
+        check('account', 'Account is required').not().isEmpty()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -35,11 +37,6 @@ router.post('/create', [
     const { amount, date, description, category, account } = req.body;
 
     try {
-        // Ensure category and account are provided
-        if (!category || !account) {
-            return res.status(400).json({ msg: 'Category and account are required' });
-        }
-
         const newTransaction = new Transaction({
             amount,
             date,
@@ -64,7 +61,9 @@ router.put('/:id', [
     auth,
     [
         check('amount', 'Amount is required').isNumeric(),
-        check('date', 'Date is required').isISO8601()
+        check('date', 'Date is required').isISO8601(),
+        check('category', 'Category is required').not().isEmpty(),
+        check('account', 'Account is required').not().isEmpty()
     ]
 ], async (req, res) => {
     const errors = validationResult(req);

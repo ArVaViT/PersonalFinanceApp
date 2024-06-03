@@ -12,8 +12,12 @@ module.exports = function(req, res, next) {
 
   // Verify token
   try {
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
+    const jwtSecret = config.get('jwtSecret');
+    if (!jwtSecret) {
+      return res.status(500).json({ msg: 'JWT secret is not defined in configuration' });
+    }
 
+    const decoded = jwt.verify(token, jwtSecret);
     req.user = decoded.user;
     next();
   } catch (err) {

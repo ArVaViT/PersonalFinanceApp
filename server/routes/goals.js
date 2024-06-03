@@ -10,6 +10,9 @@ const Goal = require('../model/Goal');
 router.get('/', auth, async (req, res) => {
     try {
         const goals = await Goal.find({ user: req.user.id });
+        if (!goals) {
+            return res.status(404).json({ msg: 'No goals found for this user' });
+        }
         res.json(goals);
     } catch (err) {
         console.error(err.message);
