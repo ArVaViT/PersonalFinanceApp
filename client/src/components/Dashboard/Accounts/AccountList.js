@@ -1,4 +1,3 @@
-// src/components/Dashboard/Accounts/AccountList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -19,7 +18,7 @@ const AccountList = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/create', config);
+                const res = await axios.get('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts', config);
                 setAccounts(res.data);
                 setLoading(false);
             } catch (err) {
@@ -40,7 +39,7 @@ const AccountList = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/create', config);
+            await axios.delete(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/${id}`, config);
             setAccounts(accounts.filter(account => account._id !== id));
         } catch (err) {
             setError('Failed to delete account. Please try again.');
