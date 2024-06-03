@@ -12,8 +12,7 @@ app.use(express.json({ extended: false }));
 
 // Настройки CORS для безопасности
 const allowedOrigins = [
-  'https://personal-finance-2ant5sf2e-vadyms-projects-dfb6f76f.vercel.app', // Ваш основной Vercel домен
-  'http://localhost:3000' // Добавьте это, если тестируете локально
+  'https://personal-finance-2ant5sf2e-vadyms-projects-dfb6f76f.vercel.app'
 ];
 
 const corsOptions = {
