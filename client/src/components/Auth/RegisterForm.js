@@ -24,6 +24,7 @@ const RegisterForm = () => {
     }
 
     try {
+      console.log(`Registering user: ${email}`);
       const res = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/users', formData);
       localStorage.setItem('token', res.data.token);
       history.push('/dashboard');

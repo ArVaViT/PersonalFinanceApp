@@ -2,39 +2,13 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const config = require('config');
 const { check, validationResult } = require('express-validator');
 const User = require('../model/User');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
-
-// Генерация JWT
-function generateToken(user) {
-  const payload = {
-    id: user.id,
-    email: user.email
-  };
-
-  const options = {
-    expiresIn: '1h' // Токен будет действителен в течение 1 часа
-  };
-
-  return jwt.sign(payload, JWT_SECRET, options);
-}
-
-// Генерация Refresh Token
-function generateRefreshToken(user) {
-  const payload = {
-    id: user.id
-  };
-
-  const options = {
-    expiresIn: '7d' // Refresh Token будет действителен в течение 7 дней
-  };
-
-  return jwt.sign(payload, JWT_SECRET, options);
-}
-
-// Маршрут для логина
+// @route   POST api/auth/login
+// @desc    Authenticate user & get token
+// @access  Public
 router.post(
   '/login',
   [
@@ -44,28 +18,46 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('Validation errors:', errors.array());
       return res.status(400).json({ errors: errors.array() });
     }
 
     const { email, password } = req.body;
+    console.log(`Login attempt for email: ${email}`);
 
     try {
       let user = await User.findOne({ email });
+
       if (!user) {
+        console.log(`User not found: ${email}`);
         return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
+
       if (!isMatch) {
+        console.log(`Incorrect password for user: ${email}`);
         return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
-      const token = generateToken(user);
-      const refreshToken = generateRefreshToken(user);
+      const payload = {
+        user: {
+          id: user.id
+        }
+      };
 
-      res.json({ token, refreshToken });
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: 360000 },
+        (err, token) => {
+          if (err) throw err;
+          console.log(`Token generated for user: ${email}`);
+          res.json({ token });
+        }
+      );
     } catch (err) {
-      console.error(err.message);
+      console.error('Server error:', err.message);
       res.status(500).send('Server error');
     }
   }
