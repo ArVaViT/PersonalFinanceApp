@@ -41,6 +41,7 @@ const ReminderList = () => {
                 }
             };
             await axios.delete(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/reminders/${id}`, config);
+
             setReminders(reminders.filter(reminder => reminder._id !== id));
         } catch (err) {
             setError('Failed to delete reminder. Please try again.');
