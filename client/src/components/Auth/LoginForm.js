@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const LoginForm = () => {
@@ -68,6 +68,9 @@ const LoginForm = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      <p>
+        Don't have an account? <Link to="/register">Register here</Link>
+      </p>
     </div>
   );
 };
