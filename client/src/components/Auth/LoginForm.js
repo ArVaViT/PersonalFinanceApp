@@ -28,6 +28,7 @@ const LoginForm = () => {
     const body = JSON.stringify({ email, password });
 
     try {
+      console.log('Login request body:', body); // Логирование данных запроса
       const res = await axios.post(
         'https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/auth/login',
         body,
@@ -37,6 +38,7 @@ const LoginForm = () => {
       localStorage.setItem('token', res.data.token);
       history.push('/dashboard');
     } catch (err) {
+      console.error('Error logging in:', err.response?.data || err.message); // Логирование ошибки
       setError(err.response?.data?.errors[0]?.msg || 'Something went wrong');
     }
   };

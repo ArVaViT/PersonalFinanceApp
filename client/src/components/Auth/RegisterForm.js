@@ -28,6 +28,7 @@ const RegisterForm = () => {
       localStorage.setItem('token', res.data.token);
       history.push('/dashboard');
     } catch (err) {
+      console.error('Error registering:', err.response?.data || err.message); // Логирование ошибки
       if (err.response && err.response.data && err.response.data.errors) {
         setError(err.response.data.errors[0].msg);
       } else {
