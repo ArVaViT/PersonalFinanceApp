@@ -19,10 +19,11 @@ const GoalList = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get('https://personal-finance-app-rngp.vercel.app/api/goals', config);
+                const res = await axios.get('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/goals', config);
                 setGoals(res.data);
                 setLoading(false);
             } catch (err) {
+                console.error('Error fetching goals:', err.response || err.message);
                 setError('Failed to fetch goals. Please try again.');
                 setLoading(false);
             }
@@ -40,9 +41,10 @@ const GoalList = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.delete(`https://personal-finance-app-rngp.vercel.app/api/goals/${id}`, config);
+            await axios.delete(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/goals/${id}`, config);
             setGoals(goals.filter(goal => goal._id !== id));
         } catch (err) {
+            console.error('Error deleting goal:', err.response || err.message);
             setError('Failed to delete goal. Please try again.');
         }
     };
