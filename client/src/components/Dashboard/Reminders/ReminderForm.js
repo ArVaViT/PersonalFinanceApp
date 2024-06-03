@@ -28,7 +28,7 @@ const ReminderForm = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.post('https://personal-finance-app-rngp.vercel.app/api/reminders/create', formData, config);
+            await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/reminders/create', formData, config);
             history.push('/reminders'); // Перенаправление на страницу списка напоминаний после создания
         } catch (err) {
             setError('Failed to create reminder. Please try again.');

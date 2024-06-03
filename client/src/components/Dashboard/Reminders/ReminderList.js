@@ -19,7 +19,7 @@ const ReminderList = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get('https://personal-finance-app-rngp.vercel.app/api/reminders', config);
+                const res = await axios.get('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/reminders', config);
                 setReminders(res.data);
                 setLoading(false);
             } catch (err) {
@@ -40,7 +40,7 @@ const ReminderList = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.delete(`https://personal-finance-app-rngp.vercel.app/api/reminders/${id}`, config);
+            await axios.delete(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/reminders/${id}`, config);
             setReminders(reminders.filter(reminder => reminder._id !== id));
         } catch (err) {
             setError('Failed to delete reminder. Please try again.');

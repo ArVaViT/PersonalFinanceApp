@@ -28,7 +28,7 @@ const GoalForm = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.post('https://personal-finance-app-rngp.vercel.app/api/goals/create', formData, config);
+            await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/goals/create', formData, config);
             history.push('/goals'); // Перенаправление на страницу списка целей после создания
         } catch (err) {
             setError('Failed to create goal. Please try again.');

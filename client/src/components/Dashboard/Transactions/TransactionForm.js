@@ -27,8 +27,8 @@ const TransactionForm = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const categoriesRes = await axios.post('https://personal-finance-app-rngp.vercel.app/api/transactions/create', formData, config);
-                const accountsRes = await axios.post('https://personal-finance-app-rngp.vercel.app/api/transactions/create', formData, config);
+                const categoriesRes = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/transactions/create', formData, config);
+                const accountsRes = await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/transactions/create', formData, config);
                 setCategories(categoriesRes.data);
                 setAccounts(accountsRes.data);
             } catch (err) {
@@ -53,7 +53,7 @@ const TransactionForm = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.post('https://personal-finance-app-rngp.vercel.app/api/transactions/create', formData, config);
+            await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/transactions/create', formData, config);
             history.push('/transactions'); // Перенаправление на страницу списка транзакций после создания
         } catch (err) {
             setError('Failed to create transaction. Please try again.');

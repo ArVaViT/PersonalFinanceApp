@@ -23,7 +23,7 @@ const RegisterForm = () => {
             setError('Passwords do not match');
         } else {
             try {
-                await axios.post('https://personal-finance-app-rngp.vercel.app/api/auth/register', formData);
+                await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/auth/register', formData);
                 history.push('/'); // Перенаправление на страницу логина после успешной регистрации
             } catch (err) {
                 if (err.response && err.response.data && err.response.data.errors) {

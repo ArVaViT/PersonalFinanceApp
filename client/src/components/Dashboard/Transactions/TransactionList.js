@@ -19,7 +19,7 @@ const TransactionList = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get('https://personal-finance-app-rngp.vercel.app/api/transactions', config);
+                const res = await axios.get('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/transactions', config);
                 setTransactions(res.data);
                 setLoading(false);
             } catch (err) {
@@ -40,7 +40,7 @@ const TransactionList = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.delete(`https://personal-finance-app-rngp.vercel.app/api/transactions/${id}`, config);
+            await axios.delete(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/transactions/${id}`, config);
             setTransactions(transactions.filter(transaction => transaction._id !== id));
         } catch (err) {
             setError('Failed to delete transaction. Please try again.');

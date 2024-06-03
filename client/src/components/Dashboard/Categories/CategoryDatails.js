@@ -23,7 +23,7 @@ const CategoryDetails = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get(`https://personal-finance-app-rngp.vercel.app/api/categories/${id}`, config);
+                const res = await axios.get(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/categories/${id}`, config);
                 setFormData(res.data);
             } catch (err) {
                 setError('Failed to fetch category. Please try again.');
@@ -47,7 +47,7 @@ const CategoryDetails = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.put(`https://personal-finance-app-rngp.vercel.app/api/categories/${id}`, formData, config);
+            await axios.put(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/categories/${id}`, formData, config);
             history.push('/categories'); // Перенаправление на страницу списка категорий после обновления
         } catch (err) {
             setError('Failed to update category. Please try again.');

@@ -26,7 +26,7 @@ const CategoryForm = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await await axios.post('https://personal-finance-app-rngp.vercel.app/api/categories/create', formData, config);
+            await axios.post('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/categories/create', formData, config);
             history.push('/categories'); // Перенаправление на страницу списка категорий после создания
         } catch (err) {
             setError('Failed to create category. Please try again.');

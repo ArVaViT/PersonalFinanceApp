@@ -28,7 +28,7 @@ const TransactionDetails = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get(`https://personal-finance-app-rngp.vercel.app/api/transactions/${id}`, config);
+                const res = await axios.get(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/transactions/${id}`, config);
                 setFormData(res.data);
             } catch (err) {
                 setError('Failed to fetch transaction. Please try again.');
@@ -44,8 +44,8 @@ const TransactionDetails = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const categoriesRes = await axios.get('https://personal-finance-app-rngp.vercel.app/api/categories', config);
-                const accountsRes = await axios.get('https://personal-finance-app-rngp.vercel.app/api/accounts', config);
+                const categoriesRes = await axios.get('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/categories', config);
+                const accountsRes = await axios.get('https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts', config);
                 setCategories(categoriesRes.data);
                 setAccounts(accountsRes.data);
             } catch (err) {
@@ -71,7 +71,7 @@ const TransactionDetails = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.put(`https://personal-finance-app-rngp.vercel.app/api/transactions/${id}`, formData, config);
+            await axios.put(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/transactions/${id}`, formData, config);
             history.push('/transactions'); // Перенаправление на страницу списка транзакций после обновления
         } catch (err) {
             setError('Failed to update transaction. Please try again.');

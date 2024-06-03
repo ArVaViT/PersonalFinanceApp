@@ -24,7 +24,7 @@ const AccountDetails = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get(`https://personal-finance-app-rngp.vercel.app${id}`, config);
+                const res = await axios.get(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com${id}`, config);
                 setFormData(res.data);
             } catch (err) {
                 setError('Failed to fetch account. Please try again.');
@@ -48,7 +48,7 @@ const AccountDetails = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.put('https://personal-finance-app-rngp.vercel.app/api/accounts/${id}', formData, config);
+            await axios.put(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/accounts/${id}`, formData, config);
             history.push('/accounts'); // Перенаправление на страницу списка счетов после обновления
         } catch (err) {
             setError('Failed to update account. Please try again.');

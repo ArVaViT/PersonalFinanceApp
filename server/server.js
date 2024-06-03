@@ -26,7 +26,7 @@ app.use(express.json({ extended: false }));
 
 // Настройки CORS для безопасности
 const corsOptions = {
-    origin: 'https://personal-finance-app-d5g5.vercel.app', // Укажите точный адрес вашего фронтенда для продакшена
+  origin: 'https://my-personal-finance-app-1e2eb0485e32.herokuapp.com', // Укажите точный адрес вашего фронтенда для продакшена
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));

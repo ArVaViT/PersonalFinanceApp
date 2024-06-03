@@ -25,7 +25,7 @@ const GoalDetails = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                const res = await axios.get(`https://personal-finance-app-rngp.vercel.app/api/goals/${id}`, config);
+                const res = await axios.get(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/goals/${id}`, config);
                 setFormData(res.data);
             } catch (err) {
                 setError('Failed to fetch goal. Please try again.');
@@ -49,7 +49,7 @@ const GoalDetails = () => {
                     'Authorization': `Bearer ${token}`
                 }
             };
-            await axios.put(`https://personal-finance-app-rngp.vercel.app/api/goals/${id}`, formData, config);
+            await axios.put(`https://my-personal-finance-app-1e2eb0485e32.herokuapp.com/api/goals/${id}`, formData, config);
             history.push('/goals'); // Перенаправление на страницу списка целей после обновления
         } catch (err) {
             setError('Failed to update goal. Please try again.');
