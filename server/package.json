@@ -11,7 +11,7 @@
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.7.0",
-    "mongoose": "^8.3.3"
+    "mongoose": "^8.4.1"
   },
   "scripts": {
     "start": "node server.js"
